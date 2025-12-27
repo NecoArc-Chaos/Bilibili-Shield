@@ -1,9 +1,3 @@
-这是为您准备的最终版 **README.md**。
-
-它采用了开源社区标准的文档格式，专业、清晰、详尽。你可以直接将其发布在 GitHub、GreasyFork 或作为项目的说明文档。
-
----
-
 # 🛡️ Bilibili 全能护盾 (Bilibili Omnipotent Shield)
 
 > **可能是目前最强力、最智能、最稳定的 B 站深度净化脚本。**

@@ -2,6 +2,7 @@
   "version": "2025-12-29",
   "description": "Bilibili Shield Ban List (Merged Complete Edition)",
   "spam_patterns": [
+    "压抑了",
     "求你了",
     "淘宝",
     "打一发",
@@ -941,6 +942,7 @@
     "完結灑花"
   ]
 }
+
 
 
 

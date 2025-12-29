@@ -1,4 +1,4 @@
-# 终止维护 襙称冯bilibili，拉一坨大的给我吃。
+# 暂时中止维护，在写逆天东西
 
 ## 🛡️ Bilibili 全能护盾 (Bilibili Omnipotent Shield)
 

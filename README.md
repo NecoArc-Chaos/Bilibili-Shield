@@ -1,4 +1,6 @@
-# 🛡️ Bilibili 全能护盾 (Bilibili Omnipotent Shield)
+# 终止维护 襙称冯bilibili，拉一坨大的给我吃。
+
+## 🛡️ Bilibili 全能护盾 (Bilibili Omnipotent Shield)
 
 > **一款基于浏览器端的 B 站深度定制与净化工具。**
 > 旨在通过技术手段过滤信息流中的无关内容，还原纯净的视频浏览体验。支持 Bilibili-Old 旧版样式。

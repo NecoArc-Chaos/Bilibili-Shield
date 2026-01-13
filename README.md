@@ -1,4 +1,4 @@
-# 暂时中止维护，在写逆天东西
+# 已被b站砍头 停止维护 若有需要 请随意读取源文件
 
 ## 🛡️ Bilibili 全能护盾 (Bilibili Omnipotent Shield)
 

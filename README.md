@@ -1,5 +1,3 @@
-# 已被b站砍头 停止维护 若有需要 请随意读取源文件
-
 ## 🛡️ Bilibili 全能护盾 (Bilibili Omnipotent Shield)
 
 > **一款基于浏览器端的 B 站深度定制与净化工具。**

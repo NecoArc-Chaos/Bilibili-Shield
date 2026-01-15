@@ -1,7 +1,7 @@
 # Bilibili Omnipotent Shield (哔哩哔哩全能护盾)
 
 **Railgun Ultimate Edition | Version 1.3.1-Release**
-
+## 全能护盾能陪各位的就到这里了，代码全部开源，随意使用！
 **哔哩哔哩全能护盾** 是一个集成了广告净化、功能解锁、界面美化与安全防护于一体的 Tampermonkey 用户脚本。
 
 本项目基于 **"Railgun" 架构** 重构，旨在提供 LV6 级别的 B 站浏览体验。它不仅拥有以 **御坂美琴（Misaka Mikoto）** 为灵感的现代化 UI 设计，更在底层逻辑上实现了对页面元素的 DOM 级精准控制。

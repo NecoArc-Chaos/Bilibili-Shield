@@ -29,13 +29,17 @@ window.onload = async function() {
 
     const modelPath = 'Live2d/33/33.default.model.json';
     
-    // 获取容器的实际尺寸
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
+    // 获取容器的实际尺寸（考虑CSS媒体查询后的值）
+    const containerRect = container.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
 
     // 设置 canvas 的实际像素尺寸（关键！）
-    canvas.width = containerWidth;
-    canvas.height = containerHeight;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = containerWidth * dpr;
+    canvas.height = containerHeight * dpr;
+    canvas.style.width = containerWidth + 'px';
+    canvas.style.height = containerHeight + 'px';
 
     // 正确初始化 PIXI Application
     const app = new PIXI.Application({
@@ -44,7 +48,7 @@ window.onload = async function() {
         backgroundAlpha: 0,
         width: containerWidth,
         height: containerHeight,
-        resolution: window.devicePixelRatio || 1,
+        resolution: dpr,
         autoDensity: true
     });
 
@@ -62,10 +66,9 @@ window.onload = async function() {
         console.log("模型原始尺寸:", modelWidth, "x", modelHeight);
 
         // 计算缩放比例：让模型完整显示在容器内
-        // 取宽度和高度的较小比例，确保模型不会超出
         const scaleX = containerWidth / modelWidth;
         const scaleY = containerHeight / modelHeight;
-        const scale = Math.min(scaleX, scaleY) * 0.85; // 留一点边距
+        const scale = Math.min(scaleX, scaleY) * 0.9; // 留一点边距
         
         model.scale.set(scale);
         
@@ -79,18 +82,29 @@ window.onload = async function() {
         // X: 水平居中
         model.x = containerWidth / 2;
         
-        // Y: 底部对齐（因为锚点在底部，所以直接设为容器高度）
+        // Y: 底部对齐
         model.y = containerHeight;
 
         console.log("缩放比例:", scale);
         console.log("缩放后尺寸:", scaledWidth, "x", scaledHeight);
         console.log("模型位置: X=", model.x, "Y=", model.y);
 
-        // --- 交互 ---
+        // --- 交互：设置正确的点击区域 ---
         model.interactive = true;
         model.buttonMode = true;
+        
+        // 扩大点击区域（整个容器都可点击）
+        model.hitArea = new PIXI.Rectangle(
+            -containerWidth / 2,  // 因为锚点在中心，所以从负值开始
+            -containerHeight,     // 从顶部开始
+            containerWidth,
+            containerHeight
+        );
 
-        model.on('pointertap', () => { 
+        // 触摸/点击回调函数
+        const onTap = () => { 
+            console.log("🎯 模型被点击了！");
+            
             // 1. 动作
             model.motion('tap_body'); 
             
@@ -104,7 +118,17 @@ window.onload = async function() {
             window.bubbleTimer = setTimeout(() => {
                 bubble.classList.remove('show');
             }, 3000);
-        });
+        };
+
+        // PIXI 事件
+        model.on('pointertap', onTap);
+        
+        // 备用：直接监听 canvas 的触摸/点击事件（更可靠）
+        canvas.addEventListener('click', onTap);
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault(); // 防止触发两次
+            onTap();
+        }, { passive: false });
 
         console.log("✅ Live2D 模型加载成功！");
         setTimeout(() => { loader.classList.add('hide'); }, 800);

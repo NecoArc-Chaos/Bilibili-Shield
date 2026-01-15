@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哔哩哔哩全能护盾 - Railgun Ultimate</title>
+    
+    <!-- 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Live2D 依赖 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.2/browser/pixi.min.js"></script>
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+
+    <!-- 样式表 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Loading 遮罩 -->
+    <div class="loader-overlay" id="loader">
+        <div class="loader-text">少女祈祷中...</div>
+        <div id="status" style="margin-top:10px; color:rgba(255,255,255,0.7); font-size:0.9rem">Accessing Misaka Network...</div>
+    </div>
+
+    <!-- 动态背景 -->
+    <div class="bg-layer">
+        <div class="bg-grid"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="logo"><i class="fa-solid fa-bolt-lightning"></i> 全能护盾</div>
+        <div class="nav-links">
+            <a href="#features">功能特性</a>
+            <a href="#install">安装指南</a>
+            <a href="#changelog">更新日志</a>
+        </div>
+        <a href="https://github.com/Sakurairinaqwq/Bilibili-Shield" target="_blank" class="btn-primary">
+            <i class="fa-brands fa-github"></i> 获取脚本
+        </a>
+    </nav>
+
+    <!-- Hero 主视觉 -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <div class="badge">Version 1.3.1-Release</div>
+                <h1>Bilibili <br>Omnipotent Shield</h1>
+                <p>
+                    基于 <strong>Railgun 架构</strong> 重构，提供 LV6 级别的 B 站浏览体验。<br>
+                    集成广告净化、功能解锁、界面美化与安全防护。
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="#install" class="btn-primary" style="padding: 14px 35px; font-size: 1.1rem;">
+                        <i class="fa-solid fa-download"></i> 立即接入
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual" id="visual-area">
+                <div class="float-icon fi-1"><i class="fa-solid fa-star"></i></div>
+                <div class="float-icon fi-2"><i class="fa-solid fa-shield-cat"></i></div>
+                <div class="float-icon fi-3"><i class="fa-solid fa-bolt"></i></div>
+
+                <!-- Shield Panel 模拟 -->
+                <div class="shield-panel" id="tilt-card">
+                    <div class="panel-header">
+                        <div class="header-title">
+                            <i class="fa-solid fa-bolt"></i> 全能护盾 
+                            <span class="version-tag">V1.3.1</span>
+                        </div>
+                        <i class="fa-solid fa-xmark" style="cursor: pointer; opacity: 0.8;"></i>
+                    </div>
+
+                    <div class="panel-tabs">
+                        <div class="tab-item active">通用</div>
+                        <div class="tab-item">净化</div>
+                        <div class="tab-item">解锁</div>
+                        <div class="tab-item">日志</div>
+                    </div>
+
+                    <div class="panel-content">
+                        <div class="status-card">
+                            <h2>931</h2>
+                            <p>御坂网络 · 规则覆盖中</p>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="label"><i class="fa-solid fa-ban" style="color:#FF5D5D"></i> 禁止自动弹出登录</div>
+                            <div class="switch active"></div>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="label"><i class="fa-solid fa-tv" style="color:#00A1D6"></i> 经典顶栏配色</div>
+                            <div class="switch active"></div>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="label"><i class="fa-solid fa-code" style="color:#888"></i> 开发者模式</div>
+                            <div class="switch"></div>
+                        </div>
+
+                        <button class="full-btn">立即更新云端词库</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心特性 -->
+    <section id="features" class="section-container">
+        <h2 class="section-title">核心特性 <span>LEVEL 5</span></h2>
+        <div class="bento-grid">
+            <div class="bento-card card-large">
+                <div class="bento-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>超电磁炮 UI</h3>
+                <p>常盘台风格设计，界面配色采用标志性的米色与电击蓝。悬浮球采用"硬币"设计，集成物理回弹动画与呼吸效果。</p>
+            </div>
+            
+            <div class="bento-card">
+                <div class="bento-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>绝对防御</h3>
+                <p>基于 MutationObserver 的智能清道夫，精准识别并移除广告占位符。</p>
+            </div>
+
+            <div class="bento-card card-tall">
+                <div class="bento-icon"><i class="fa-solid fa-comments"></i></div>
+                <h3>能力解禁</h3>
+                <p>突破登录限制，强制开启 1080P+ 高码率画质。解锁游客评论区查看，完整复原楼中楼体验。</p>
+                <div style="background:#f4f9ff; padding:15px; border-radius:12px; font-size:0.85rem; margin-top:20px;">
+                    <div style="margin-bottom:8px;"><strong style="color:var(--primary)">Misaka:</strong> 终于能不用登录看评论了！</div>
+                    <div><strong style="color:var(--accent)">Kuroko:</strong> 姐姐大人太棒了！</div>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <div class="bento-icon"><i class="fa-solid fa-network-wired"></i></div>
+                <h3>云端同步</h3>
+                <p>接入御坂网络，每24小时自动拉取最新屏蔽规则库。</p>
+            </div>
+
+            <div class="bento-card">
+                <div class="bento-icon"><i class="fa-solid fa-lock"></i></div>
+                <h3>严谨控制</h3>
+                <p>Opt-In 策略，所有功能默认关闭。用户拥有绝对控制权。</p>
+            </div>
+        </div>
+
+        <!-- 功能矩阵 -->
+        <div class="feature-matrix">
+            <div class="matrix-col">
+                <h4><i class="fa-solid fa-shield-cat"></i> 净化功能</h4>
+                <ul class="matrix-list">
+                    <li><i class="fa-solid fa-check"></i> 实时弹幕拦截</li>
+                    <li><i class="fa-solid fa-check"></i> 自动拉黑触犯者</li>
+                    <li><i class="fa-solid fa-check"></i> 隐藏首页轮播图</li>
+                    <li><i class="fa-solid fa-check"></i> 评论区净化</li>
+                </ul>
+            </div>
+            <div class="matrix-col">
+                <h4><i class="fa-solid fa-unlock-keyhole"></i> 解锁功能</h4>
+                <ul class="matrix-list">
+                    <li><i class="fa-solid fa-check"></i> 解锁 1080P+ 画质</li>
+                    <li><i class="fa-solid fa-check"></i> 未登录看评论</li>
+                    <li><i class="fa-solid fa-check"></i> 显示粉丝勋章</li>
+                    <li><i class="fa-solid fa-check"></i> 防音画不同步</li>
+                </ul>
+            </div>
+            <div class="matrix-col">
+                <h4><i class="fa-solid fa-gear"></i> 通用设置</h4>
+                <ul class="matrix-list">
+                    <li><i class="fa-solid fa-check"></i> 禁止自动弹出登录</li>
+                    <li><i class="fa-solid fa-check"></i> 经典粉色顶栏</li>
+                    <li><i class="fa-solid fa-check"></i> 开发者模式</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 安装指南 -->
+    <section id="install" class="section-container">
+        <h2 class="section-title">安装指南</h2>
+        <div class="info-box">
+            <ol class="step-list">
+                <li>
+                    <strong>安装脚本管理器</strong><br>
+                    推荐使用 <a href="https://www.tampermonkey.net/" target="_blank" style="color:var(--accent);">Tampermonkey (油猴)</a> 或 Violentmonkey。
+                </li>
+                <li>
+                    <strong>安装脚本</strong><br>
+                    点击页面右上角的「获取脚本」按钮，或将源码复制到新建脚本中。
+                </li>
+                <li>
+                    <strong>启动御坂网络</strong><br>
+                    打开 Bilibili 任意页面，寻找屏幕右下角的 <strong>旋转硬币</strong>。点击即可开启控制面板。
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- 更新日志 -->
+    <section id="changelog" class="section-container">
+        <h2 class="section-title">更新日志</h2>
+        <div class="info-box">
+            <div class="changelog-item">
+                <h4 style="margin-bottom:10px;">v1.3.1-Release</h4>
+                <div style="font-size:0.9rem; color:#666; line-height:1.8;">
+                    <div><span class="tag fix">Fix</span> 修复翻页逻辑缺陷：点击「下一页」后页码错乱的问题</div>
+                    <div><span class="tag fix">Fix</span> 修复评论过滤时可能出现的空指针异常</div>
+                    <div><span class="tag perf">Perf</span> 优化 Wbi 签名性能：添加 5 分钟缓存机制</div>
+                    <div><span class="tag feat">Feature</span> 完美修复未登录查看评论功能</div>
+                    <div><span class="tag feat">Feature</span> 支持评论排序切换（最热/最新）</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-quote">"Only my Railgun can shoot it."</div>
+        <p>© 2024 Bilibili Omnipotent Shield. Project based on Railgun Architecture.</p>
+        <p>Disclaimer: This project is for technical research only. Please support Bilibili Premium.</p>
+        <p style="margin-top:10px; opacity: 0.6; font-size: 0.8rem;">Thanks to DD1969 & Open Source Community.</p>
+    </footer>
+
+    <!-- Live2D 气泡 -->
+    <div id="speech-bubble">戳我干嘛呀？快去安装脚本！(≧∇≦)ﾉ</div>
+    
+    <!-- Live2D 容器 -->
+    <div id="live2d-container">
+        <canvas id="live2d-canvas"></canvas>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

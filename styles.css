@@ -1,0 +1,693 @@
+/* ========================================
+   哔哩哔哩全能护盾 - 样式表
+   ======================================== */
+
+/* --- 核心变量 --- */
+:root {
+    --primary: #FB7299; 
+    --accent: #00A1D6; 
+    --dark: #2c3e50;
+    --glass: rgba(255, 255, 255, 0.75); 
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --shadow-glow: 0 10px 40px rgba(251, 114, 153, 0.2);
+    --switch-on: #F25D8E;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-font-smoothing: antialiased; 
+    cursor: url('https://cur.cursors-4u.net/anime/ani-12/ani1158.cur'), auto; 
+}
+
+body { 
+    font-family: 'Noto Sans SC', 'Outfit', sans-serif; 
+    background: #fdfdfd; 
+    color: var(--dark); 
+    overflow-x: hidden; 
+    position: relative; 
+}
+
+/* --- Loading --- */
+.loader-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: var(--primary); 
+    z-index: 9999; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+}
+.loader-text { 
+    font-family: 'ZCOOL KuaiLe'; 
+    font-size: 2.5rem; 
+    color: white; 
+    animation: bounce 1s infinite; 
+}
+.loader-overlay.hide { 
+    transform: translateY(-100%); 
+}
+
+/* --- 动态背景 --- */
+.bg-layer { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -1; 
+    overflow: hidden; 
+    background: radial-gradient(circle at 10% 10%, rgba(251, 114, 153, 0.05), transparent 40%), 
+                radial-gradient(circle at 90% 90%, rgba(0, 161, 214, 0.08), transparent 40%); 
+}
+.bg-grid { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    background-image: linear-gradient(rgba(0, 161, 214, 0.05) 1px, transparent 1px), 
+                      linear-gradient(90deg, rgba(0, 161, 214, 0.05) 1px, transparent 1px); 
+    background-size: 40px 40px; 
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%); 
+}
+.blob { 
+    position: absolute; 
+    filter: blur(60px); 
+    opacity: 0.5; 
+    z-index: -1; 
+    animation: breathe 8s infinite alternate; 
+}
+.blob-1 { 
+    top: -10%; 
+    left: -10%; 
+    width: 50vw; 
+    height: 50vw; 
+    background: #ffe6ef; 
+}
+.blob-2 { 
+    bottom: 10%; 
+    right: -10%; 
+    width: 40vw; 
+    height: 40vw; 
+    background: #e0f6ff; 
+    animation-delay: -4s; 
+}
+
+/* --- 导航栏 --- */
+nav { 
+    position: fixed; 
+    top: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 90%; 
+    max-width: 1200px; 
+    padding: 12px 30px; 
+    background: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(20px); 
+    border-radius: 24px; 
+    border: 1px solid var(--glass-border); 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    z-index: 100; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+    transition: 0.3s; 
+}
+nav:hover { 
+    box-shadow: 0 15px 40px rgba(251, 114, 153, 0.15); 
+    width: 92%; 
+}
+.logo { 
+    font-family: 'ZCOOL KuaiLe'; 
+    font-size: 1.6rem; 
+    color: var(--primary); 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    text-shadow: 2px 2px 0px rgba(255,255,255,1); 
+}
+.nav-links a { 
+    margin-left: 20px; 
+    text-decoration: none; 
+    color: var(--dark); 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+    transition: 0.2s; 
+}
+.nav-links a:hover { 
+    color: var(--primary); 
+}
+.btn-primary { 
+    background: linear-gradient(135deg, var(--primary), #ff9a9e); 
+    color: white !important; 
+    padding: 10px 24px; 
+    border-radius: 14px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    box-shadow: 0 4px 15px rgba(251, 114, 153, 0.3); 
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
+}
+.btn-primary:hover { 
+    transform: scale(1.05) translateY(-2px); 
+    box-shadow: 0 8px 25px rgba(251, 114, 153, 0.5); 
+}
+
+/* --- Hero 主视觉 --- */
+.hero { 
+    min-height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 140px 20px 80px; 
+    perspective: 1000px; 
+}
+.hero-container { 
+    display: grid; 
+    grid-template-columns: 1fr 1.2fr; 
+    gap: 60px; 
+    max-width: 1200px; 
+    width: 100%; 
+    align-items: center; 
+}
+.hero-text h1 { 
+    font-size: 4rem; 
+    line-height: 1.1; 
+    font-weight: 900; 
+    margin-bottom: 10px; 
+    background: linear-gradient(135deg, var(--primary) 0%, #ff7eb3 100%); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    font-family: 'Outfit'; 
+    letter-spacing: -1px; 
+    position: relative; 
+}
+.hero-text .badge { 
+    display: inline-block; 
+    background: rgba(0,161,214,0.1); 
+    color: var(--accent); 
+    padding: 5px 10px; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    font-size: 0.9rem; 
+    margin-bottom: 15px; 
+    border: 1px solid rgba(0,161,214,0.2); 
+}
+.hero-text p { 
+    font-size: 1.1rem; 
+    color: #666; 
+    margin-bottom: 30px; 
+    line-height: 1.7; 
+}
+
+/* --- UI 复刻 (Shield Panel) --- */
+.hero-visual { 
+    position: relative; 
+    height: 500px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+.float-icon { 
+    position: absolute; 
+    font-size: 2rem; 
+    z-index: 20; 
+    animation: float 4s ease-in-out infinite; 
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); 
+}
+.fi-1 { top: 10%; left: 0%; color: var(--primary); animation-delay: 0s; font-size: 3rem; }
+.fi-2 { bottom: 15%; right: 5%; color: var(--accent); animation-delay: 2s; font-size: 2.5rem; }
+.fi-3 { top: 20%; right: 0%; color: #FFD700; animation-delay: 1s; font-size: 1.5rem; }
+
+.shield-panel {
+    width: 360px; 
+    background: #fff; 
+    border-radius: 16px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.03);
+    overflow: hidden; 
+    font-family: 'Noto Sans SC', sans-serif;
+    transform-style: preserve-3d; 
+    transition: transform 0.1s ease-out;
+    position: relative; 
+    z-index: 10;
+}
+.panel-header { 
+    background: linear-gradient(90deg, #FF8EB3, #FB7299); 
+    padding: 12px 15px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    color: white; 
+}
+.header-title { 
+    font-weight: bold; 
+    font-size: 0.95rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+}
+.version-tag { 
+    background: rgba(255,255,255,0.25); 
+    font-size: 0.7rem; 
+    padding: 1px 6px; 
+    border-radius: 4px; 
+}
+.panel-tabs { 
+    display: flex; 
+    background: #fff; 
+    padding: 5px 5px 0; 
+    border-bottom: 1px solid #eee; 
+}
+.tab-item { 
+    flex: 1; 
+    text-align: center; 
+    padding: 10px 0; 
+    font-size: 0.9rem; 
+    color: #666; 
+    cursor: pointer; 
+    position: relative; 
+}
+.tab-item.active { 
+    color: var(--primary); 
+    font-weight: bold; 
+}
+.tab-item.active::after { 
+    content: ''; 
+    position: absolute; 
+    bottom: 0; 
+    left: 20%; 
+    width: 60%; 
+    height: 3px; 
+    background: var(--primary); 
+    border-radius: 3px 3px 0 0; 
+}
+.panel-content { 
+    padding: 15px; 
+    background: #f9f9f9; 
+    min-height: 350px; 
+}
+.status-card { 
+    background: linear-gradient(135deg, #4CC3FF, #00A1D6); 
+    border-radius: 12px; 
+    padding: 20px; 
+    color: white; 
+    text-align: center; 
+    margin-bottom: 15px; 
+    box-shadow: 0 5px 15px rgba(0, 161, 214, 0.25); 
+    position: relative; 
+    overflow: hidden; 
+}
+.status-card h2 { 
+    font-size: 2.8rem; 
+    margin: 0; 
+    line-height: 1; 
+    font-family: 'Outfit'; 
+    font-weight: 700; 
+}
+.status-card p { 
+    font-size: 0.8rem; 
+    opacity: 0.9; 
+    margin-top: 5px; 
+}
+.status-card::before { 
+    content: ''; 
+    position: absolute; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%; 
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 2px, transparent 3px); 
+    background-size: 20px 20px; 
+    opacity: 0.5; 
+    transform: rotate(30deg); 
+}
+.setting-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: white; 
+    padding: 12px 15px; 
+    border-radius: 10px; 
+    margin-bottom: 10px; 
+    border: 1px solid #eee; 
+    transition: 0.2s; 
+}
+.setting-row:hover { 
+    transform: translateX(3px); 
+    border-color: var(--primary); 
+}
+.label { 
+    font-size: 0.9rem; 
+    color: #444; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+.switch { 
+    width: 40px; 
+    height: 20px; 
+    background: #ddd; 
+    border-radius: 20px; 
+    position: relative; 
+    cursor: pointer; 
+    transition: 0.3s; 
+}
+.switch::after { 
+    content: ''; 
+    position: absolute; 
+    top: 2px; 
+    left: 2px; 
+    width: 16px; 
+    height: 16px; 
+    background: white; 
+    border-radius: 50%; 
+    transition: 0.3s; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
+}
+.switch.active { 
+    background: var(--switch-on); 
+}
+.switch.active::after { 
+    left: 22px; 
+}
+.full-btn { 
+    width: 100%; 
+    background: var(--accent); 
+    color: white; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    margin-top: 5px; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+.full-btn:hover { 
+    background: #4CC3FF; 
+}
+
+/* --- Bento Grid (核心特性) --- */
+.section-container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 80px 20px; 
+    position: relative; 
+    z-index: 5; 
+}
+.section-title { 
+    text-align: center; 
+    font-family: 'ZCOOL KuaiLe'; 
+    font-size: 2.5rem; 
+    margin-bottom: 50px; 
+    color: var(--dark); 
+}
+.section-title span { 
+    color: var(--primary); 
+}
+.bento-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, 280px); 
+    gap: 24px; 
+}
+.bento-card { 
+    background: rgba(255, 255, 255, 0.85); 
+    border-radius: 24px; 
+    padding: 30px; 
+    border: 1px solid rgba(255,255,255,0.8); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    position: relative; 
+    overflow: hidden; 
+    backdrop-filter: blur(10px); 
+}
+.bento-card:hover { 
+    transform: translateY(-10px) scale(1.02); 
+    box-shadow: var(--shadow-glow); 
+    border-color: var(--primary); 
+}
+.card-large { 
+    grid-column: span 2; 
+    background: linear-gradient(135deg, #fff5f7, #fff); 
+}
+.card-tall { 
+    grid-row: span 2; 
+    background: linear-gradient(to bottom, #eef9ff, #fff); 
+}
+.bento-icon { 
+    font-size: 2.5rem; 
+    margin-bottom: 20px; 
+    width: 60px; 
+    height: 60px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: white; 
+    border-radius: 16px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    color: var(--primary); 
+}
+.bento-card h3 { 
+    margin-bottom: 10px; 
+    font-size: 1.4rem; 
+    font-weight: 700; 
+}
+.bento-card p { 
+    color: #666; 
+    line-height: 1.6; 
+    font-size: 0.95rem; 
+}
+
+/* --- 功能列表 (Matrix) --- */
+.feature-matrix { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+    margin-top: 40px; 
+}
+.matrix-col h4 { 
+    color: var(--accent); 
+    margin-bottom: 20px; 
+    font-size: 1.2rem; 
+    border-left: 4px solid var(--accent); 
+    padding-left: 10px; 
+}
+.matrix-list { 
+    list-style: none; 
+}
+.matrix-list li { 
+    padding: 12px 15px; 
+    background: white; 
+    margin-bottom: 10px; 
+    border-radius: 10px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03); 
+    transition: 0.2s; 
+}
+.matrix-list li:hover { 
+    transform: translateX(5px); 
+    color: var(--primary); 
+}
+.matrix-list i { 
+    color: #ccc; 
+    font-size: 0.8rem; 
+}
+
+/* --- 安装步骤 & 更新日志 --- */
+.info-box { 
+    background: white; 
+    padding: 40px; 
+    border-radius: 24px; 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05); 
+    margin-bottom: 40px; 
+}
+.step-list { 
+    counter-reset: step; 
+    list-style: none; 
+}
+.step-list li { 
+    position: relative; 
+    padding-left: 50px; 
+    margin-bottom: 20px; 
+}
+.step-list li::before { 
+    counter-increment: step; 
+    content: counter(step); 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    width: 35px; 
+    height: 35px; 
+    background: var(--primary); 
+    color: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+}
+
+.changelog-item { 
+    border-left: 3px solid #ddd; 
+    padding-left: 20px; 
+    margin-bottom: 20px; 
+    position: relative; 
+}
+.changelog-item::before { 
+    content: ''; 
+    position: absolute; 
+    left: -6px; 
+    top: 6px; 
+    width: 9px; 
+    height: 9px; 
+    background: var(--primary); 
+    border-radius: 50%; 
+}
+.tag { 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+    color: white; 
+    margin-right: 5px; 
+}
+.tag.fix { background: #ff9a9e; } 
+.tag.feat { background: #a18cd1; } 
+.tag.perf { background: #00A1D6; }
+
+/* --- Footer --- */
+footer { 
+    text-align: center; 
+    padding: 60px 20px 100px; 
+    color: #888; 
+    font-size: 0.9rem; 
+    border-top: 1px solid rgba(0,0,0,0.05); 
+    margin-top: 60px; 
+}
+.footer-quote { 
+    font-family: 'ZCOOL KuaiLe'; 
+    color: var(--primary); 
+    font-size: 1.2rem; 
+    margin-bottom: 20px; 
+}
+
+/* --- Live2D 容器 (修复版) --- */
+#live2d-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 400px;
+    z-index: 50;
+    pointer-events: none;
+}
+
+#live2d-canvas {
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+}
+
+/* --- 气泡 --- */
+#speech-bubble {
+    position: fixed; 
+    bottom: 420px; 
+    right: 50px;
+    background: white; 
+    padding: 15px 20px; 
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+    border: 2px solid var(--primary);
+    font-family: 'ZCOOL KuaiLe'; 
+    font-size: 1rem; 
+    color: var(--dark);
+    opacity: 0; 
+    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 60; 
+    max-width: 220px; 
+    pointer-events: none;
+}
+#speech-bubble.show { 
+    opacity: 1; 
+    transform: scale(1); 
+}
+#speech-bubble::after {
+    content: ''; 
+    position: absolute; 
+    bottom: -10px; 
+    right: 40px;
+    width: 20px; 
+    height: 20px; 
+    background: white;
+    border-bottom: 2px solid var(--primary); 
+    border-right: 2px solid var(--primary);
+    transform: rotate(45deg);
+}
+
+/* --- 动画关键帧 --- */
+.particle { 
+    position: fixed; 
+    pointer-events: none; 
+    border-radius: 50%; 
+    animation: pop 0.6s cubic-bezier(0, 0.9, 0.57, 1) forwards; 
+}
+
+@keyframes shimmer { 
+    0% { left: -100%; } 
+    100% { left: 200%; } 
+}
+@keyframes float { 
+    0%, 100% { transform: translateY(0); } 
+    50% { transform: translateY(-15px); } 
+}
+@keyframes breathe { 
+    0%, 100% { transform: scale(1); } 
+    50% { transform: scale(1.03) translateY(-5px); } 
+}
+@keyframes bounce { 
+    0%, 100% { transform: translateY(0); } 
+    50% { transform: translateY(-10px); } 
+}
+@keyframes pop { 
+    to { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; } 
+}
+
+/* --- 移动端适配 --- */
+@media (max-width: 900px) {
+    .hero-container { 
+        grid-template-columns: 1fr; 
+        text-align: center; 
+    }
+    .hero-visual { 
+        display: none; 
+    }
+    .bento-grid { 
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto; 
+    }
+    .card-large, .card-tall { 
+        grid-column: span 1; 
+        grid-row: span 1; 
+    }
+    #live2d-container { 
+        width: 180px; 
+        height: 280px; 
+    }
+    #speech-bubble {
+        bottom: 300px;
+        right: 30px;
+    }
+    .nav-links { 
+        display: none; 
+    }
+}

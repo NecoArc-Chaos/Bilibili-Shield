@@ -1,0 +1,45 @@
+{
+    "type": "Live2D Model Setting",
+    "name": "33-default",
+    "label": "33",
+    "model": "33.v2.moc",
+    "textures": [
+        "texture_00.png",
+        "texture_01.png",
+        "texture_02.png",
+        "texture_03.png"
+    ],
+    "motions": {
+        "idle": [
+            {
+                "file": "33.v2.idle-01.mtn",
+                "fade_in": 2000,
+                "fade_out": 2000
+            },
+            {
+                "file": "33.v2.idle-02.mtn",
+                "fade_in": 2000,
+                "fade_out": 2000
+            },
+            {
+                "file": "33.v2.idle-03.mtn",
+                "fade_in": 100,
+                "fade_out": 100
+            }
+        ],
+        "tap_body": [
+            {
+                "file": "33.v2.touch.mtn",
+                "fade_in": 500,
+                "fade_out": 200
+            }
+        ],
+        "thanking": [
+            {
+                "file": "33.v2.thanking.mtn",
+                "fade_in": 2000,
+                "fade_out": 2000
+            }
+        ]
+    }
+}

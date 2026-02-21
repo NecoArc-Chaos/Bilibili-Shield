@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bilibili Omnipotent Shield (Bilibili 全能护盾) - Railgun Ultimate (Refactored & DevMode Enhanced)
 // @namespace    http://tampermonkey.net/
-// @version      1.3.2-DevEnhanced
+// @version      1.3.2
 // @description  哔哩哔哩全能护盾 - 完美修复未登录查看评论功能 & 极致净化体验 (开发者模式支持红框高亮敏感词)
 // @author       Sakurairinaqwq & DD1969 & Refactored
 // @match        *://*.bilibili.com/*
@@ -32,7 +32,7 @@
      * ============================================================
      */
     const CONSTANTS = {
-        REMOTE_BAN_LIST_URL: "https://arkn.icu/Bilibili-Shield/%E5%85%A8%E8%83%BD%E6%8A%A4%E7%9B%BE%E5%BA%93/%E8%BF%9D%E7%A6%81%E8%AF%8D/ban.json",
+        REMOTE_BAN_LIST_URL: "这里填入你的域名/GitHub直链！我们正在创建新功能，请稍后！",
         UPDATE_INTERVAL: 24 * 60 * 60 * 1000,
         CACHE_KEYS: {
             RULES: 'bili_shield_rules_v3',
@@ -199,11 +199,11 @@
             document.body.appendChild(container);
 
             const style = DOMUtils.createStyle(`
-                .bs-toast { background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(16px); padding: 12px 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 174, 236, 0.15); display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: bold; color: #444; border: 2px solid #FFF; border-left-width: 5px; opacity: 0; transform: translateX(30px) skewX(-5deg); animation: bsToastIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards; pointer-events: auto; min-width: 200px; font-family: "HarmonyOS Sans", "PingFang SC", sans-serif; }
+                .bs-toast { background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(16px); padding: 12px 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(244, 164, 96, 0.15); display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: bold; color: #444; border: 2px solid #FFF; border-left-width: 5px; opacity: 0; transform: translateX(30px) skewX(-5deg); animation: bsToastIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards; pointer-events: auto; min-width: 200px; font-family: "HarmonyOS Sans", "PingFang SC", sans-serif; }
                 .bs-toast.hide { animation: bsToastOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important; }
-                .bs-toast.success { border-left-color: #00AEEC; background: linear-gradient(to right, #F0FAFF, #FFF); }
+                .bs-toast.success { border-left-color: #F4A460; background: linear-gradient(to right, #FFF8F0, #FFF); }
                 .bs-toast.error { border-left-color: #FF6699; background: linear-gradient(to right, #FFF0F5, #FFF); }
-                .bs-toast.info { border-left-color: #F4A460; background: linear-gradient(to right, #FFF8F0, #FFF); }
+                .bs-toast.info { border-left-color: #8B4513; background: linear-gradient(to right, #F4E5D0, #FFF); }
                 @keyframes bsToastIn { to { opacity: 1; transform: translateX(0) skewX(0); } }
                 @keyframes bsToastOut { to { opacity: 0; transform: translateX(30px) scale(0.9); } }
             `);
@@ -216,7 +216,7 @@
             if (!container) return;
             const toast = document.createElement('div');
             toast.className = `bs-toast ${type}`;
-            const icon = type === 'success' ? '✨' : (type === 'error' ? '💥' : '⚡');
+            const icon = type === 'success' ? '⚡' : (type === 'error' ? '💥' : '⚡');
             toast.innerHTML = `<span style="font-size:18px">${icon}</span><span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => {
@@ -448,7 +448,7 @@
                 .comment-container .total-reply { margin-left: 6px; font-size: 14px; color: #9499A0; font-weight: 400; }
                 .comment-container .nav-sort { display: flex; align-items: center; margin-left: 40px; color: #9499A0; font-size: 14px; user-select: none; }
                 .comment-container .nav-sort > div { cursor: pointer; transition: color 0.2s; }
-                .comment-container .nav-sort > div:hover { color: #00AEEC; }
+                .comment-container .nav-sort > div:hover { color: #F4A460; }
                 .comment-container .nav-sort .part-symbol { height: 11px; border-left: 1px solid #9499A0; margin: 0 12px; opacity: 0.5; }
                 .comment-container .nav-sort.hot .hot-sort { color: #18191C; font-weight: 500; cursor: default; }
                 .comment-container .nav-sort.time .time-sort { color: #18191C; font-weight: 500; cursor: default; }
@@ -462,7 +462,7 @@
                 .reply-item .content-warp { flex: 1; position: relative; }
                 .reply-item .user-info { display: flex; align-items: center; margin-bottom: 4px; flex-wrap: wrap; }
                 .reply-item .user-name { font-size: 13px; font-weight: 500; margin-right: 5px; color: #61666d; cursor: pointer; text-decoration: none; }
-                .reply-item .user-name:hover { color: #00AEEC; }
+                .reply-item .user-name:hover { color: #F4A460; }
                 .reply-item .reply-content { font-size: 15px; line-height: 24px; color: #18191C; overflow: hidden; word-wrap: break-word; white-space: pre-wrap; display: block; }
                 .reply-item .reply-info { display: flex; align-items: center; color: #9499A0; font-size: 13px; margin-top: 4px; }
                 .reply-item .reply-like { margin-right: 18px; display: flex; align-items: center; }
@@ -472,7 +472,7 @@
                 .sub-reply-item .sub-reply-avatar img { width: 100%; height: 100%; border-radius: 50%; border: 1px solid #F1F2F3; }
                 .sub-reply-content-box { flex: 1; font-size: 13px; line-height: 20px; }
                 .sub-user-name { font-weight: 500; margin-right: 5px; cursor: pointer; color: #61666d; text-decoration: none; }
-                .sub-user-name:hover { color: #00AEEC; }
+                .sub-user-name:hover { color: #F4A460; }
                 .sub-reply-info { font-size: 12px; color: #999; margin-top: 2px; }
                 .fan-medal { display: inline-flex; align-items: center; height: 14px; margin-left: 2px; margin-right: 4px; border: 0.5px solid rgba(169, 195, 233, 0.18); border-radius: 10px; background-color: rgba(158, 186, 232, 0.2); vertical-align: middle; cursor: pointer; padding-right: 4px; }
                 .fan-medal.fan-medal-with-guard-icon { border-color: #8da8e8; background-color: #b4ccff; }
@@ -485,8 +485,8 @@
                 .page-switcher-wrapper { display: flex; font-size: 14px; color: #666; user-select: none; align-items: center; }
                 .page-switcher-wrapper span { margin: 0 4px; }
                 .page-switcher-wrapper span:not(.page-switcher-current-page) { padding: 8px 16px; border: 1px solid #D7DDE4; border-radius: 4px; cursor: pointer; transition: 0.2s; background: #FFF; }
-                .page-switcher-prev-btn:hover, .page-switcher-next-btn:hover { border-color: #00A1D6 !important; color: #00A1D6; }
-                .page-switcher-current-page { color: white; background-color: #00A1D6; padding: 8px 16px; border-radius: 4px; cursor: default; }
+                .page-switcher-prev-btn:hover, .page-switcher-next-btn:hover { border-color: #F4A460 !important; color: #F4A460; }
+                .page-switcher-current-page { color: white; background-color: #F4A460; padding: 8px 16px; border-radius: 4px; cursor: default; }
                 .jump-link { color: #008DDA; text-decoration: none; }
                 .jump-link:hover { text-decoration: underline; }
                 .note-prefix { display: inline-flex; align-items: center; color: #999; font-size: 12px; margin-right: 4px; vertical-align: middle; }
@@ -701,6 +701,48 @@
             highlightObserver.observe(body, { childList: true, subtree: true });
         }
 
+        // 安全高亮文本节点中的关键词
+        highlightTextNode(container, keyword) {
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+            textNodes.forEach(textNode => {
+                const parent = textNode.parentNode;
+                if (parent.nodeName === 'SPAN' && parent.classList.contains('shield-highlight')) return; // 避免重复高亮
+                const content = textNode.textContent;
+                if (!content) return;
+                const regex = new RegExp(keyword, 'g');
+                let lastIndex = 0;
+                const fragments = [];
+                let match;
+                while ((match = regex.exec(content)) !== null) {
+                    const start = match.index;
+                    const end = start + match[0].length;
+                    if (start > lastIndex) {
+                        fragments.push(document.createTextNode(content.substring(lastIndex, start)));
+                    }
+                    const span = document.createElement('span');
+                    span.className = 'shield-highlight';
+                    span.style.backgroundColor = '#FF0000';
+                    span.style.color = '#FFF';
+                    span.style.padding = '2px';
+                    span.style.borderRadius = '2px';
+                    span.style.fontWeight = 'bold';
+                    span.textContent = match[0];
+                    fragments.push(span);
+                    lastIndex = end;
+                }
+                if (lastIndex < content.length) {
+                    fragments.push(document.createTextNode(content.substring(lastIndex)));
+                }
+                if (fragments.length > 0) {
+                    const fragment = document.createDocumentFragment();
+                    fragments.forEach(f => fragment.appendChild(f));
+                    parent.replaceChild(fragment, textNode);
+                }
+            });
+        }
+
         // 通用高亮逻辑
         highlightNode(node, textSelector, type) {
             const textEl = node.querySelector(textSelector);
@@ -714,16 +756,10 @@
                 node.style.borderRadius = "4px";
                 node.style.position = "relative";
                 node.setAttribute('title', `[全能护盾] 命中规则: ${keyword}`);
-                
-                // 关键词高亮 (红底白字)
-                const keywordStr = keyword instanceof RegExp ? keyword.source : keyword;
-                try {
-                    // 简单的高亮替换，防止破坏 HTML 结构需谨慎，这里假设内容主要是文本
-                    // 为了安全起见，只替换 textContent 匹配到的部分
-                    const regex = new RegExp(keyword, 'g');
-                    textEl.innerHTML = textEl.innerHTML.replace(regex, match => `<span style="background:#FF0000;color:#FFF;padding:2px;border-radius:2px;font-weight:bold;">${match}</span>`);
-                } catch(e) {}
-                
+
+                // 安全高亮关键词
+                this.highlightTextNode(textEl, keyword instanceof RegExp ? keyword.source : keyword);
+
                 this.logger.block(`[DevMode] 标记${type}: ${keyword}`);
             }
         }
@@ -747,13 +783,10 @@
             
             if (blocked) {
                 if (this.config.get('devMode')) {
-                    // DevMode: 红框标记 + 高亮关键词
+                    // DevMode: 红框标记 + 安全高亮关键词
                     node.style.border = "2px solid red";
                     node.style.zIndex = "999999";
-                    try {
-                        const regex = new RegExp(keyword, 'g');
-                        node.innerHTML = node.innerHTML.replace(regex, match => `<span style="background:#FF0000;color:#FFF;border:1px solid #FFF;">${match}</span>`);
-                    } catch(e) {}
+                    this.highlightTextNode(node, keyword instanceof RegExp ? keyword.source : keyword);
                 } else {
                     // Normal: 隐藏
                     node.style.display = 'none';
@@ -767,7 +800,7 @@
     /**
      * ============================================================
      * 模块名称：QualityUnlocker
-     * 模块功能：解锁 1080P+ 画质
+     * 模块功能：解锁 1080P+ 画质（修复原型污染）
      * ============================================================
      */
     class QualityUnlocker {
@@ -813,16 +846,15 @@
                 originSetItem.call(this, k, v);
             };
 
-            // 欺骗播放器检测
-            Object.defineProperty(Object.prototype, 'isViewToday', { get: () => true, configurable: true });
-            Object.defineProperty(Object.prototype, 'isVideoAble', { get: () => true, configurable: true });
-
-            // 延时策略
-            const originSetTimeout = unsafeWindow.setTimeout;
-            unsafeWindow.setTimeout = function(f, d) {
-                if (d === 3e4) d = 3e8; // 延迟登录检测
-                return originSetTimeout.call(this, f, d);
-            };
+            // 在播放器实例上设置属性，而非污染 Object.prototype
+            const self = this;
+            const playerCheckInterval = setInterval(() => {
+                if (unsafeWindow.player) {
+                    unsafeWindow.player.isViewToday = true;
+                    unsafeWindow.player.isVideoAble = true;
+                    clearInterval(playerCheckInterval);
+                }
+            }, 500);
 
             // 自动关闭登录框并切换画质
             setInterval(() => {
@@ -944,7 +976,9 @@
                             this.oid = dynDetail?.data?.item?.basic?.comment_id_str;
                             this.commentType = dynDetail?.data?.item?.basic?.comment_type;
                             this.createrID = dynDetail?.data?.item?.modules?.module_author?.mid;
-                        } catch(e) {}
+                        } catch(e) {
+                            this.logger.error('获取动态详情失败');
+                        }
                     } else if (/https:\/\/www\.bilibili\.com\/read\/cv\d+.*/.test(loc.href)) {
                         this.oid = global?.__INITIAL_STATE__?.cvid;
                         this.createrID = global?.__INITIAL_STATE__?.readInfo?.author?.mid;
@@ -1162,7 +1196,7 @@
     /**
      * ============================================================
      * 模块名称：SettingsUI
-     * 模块功能：基于 Shadow DOM 的设置面板
+     * 模块功能：基于 Shadow DOM 的设置面板（美化版）
      * ============================================================
      */
     class SettingsUI {
@@ -1203,32 +1237,32 @@
 
         getStyles() {
             return `<style>
-            :host { --pink:#FF6699; --pink-light:#FFEBF1; --blue:#00AEEC; --orange:#F4A460; --text:#555; --bg:rgba(255,255,255,0.95); }
+            :host { --brown:#8B4513; --brown-light:#F4E5D0; --orange:#F4A460; --text:#555; --bg:rgba(255,255,255,0.95); }
             * { box-sizing:border-box; font-family:"HarmonyOS Sans","PingFang SC","Microsoft YaHei",sans-serif; }
-            .entry-btn { position:fixed; bottom:80px; right:24px; width:56px; height:56px; background:radial-gradient(circle at 30% 30%, #FFD700, #F4A460); border-radius:50%; box-shadow:0 6px 16px rgba(244,164,96,0.4), inset 0 2px 4px rgba(255,255,255,0.5); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:10000; transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1); animation:float 3s ease-in-out infinite; border:2px solid #FFF; }
+            .entry-btn { position:fixed; bottom:80px; right:24px; width:56px; height:56px; background:radial-gradient(circle at 30% 30%, #FFD700, var(--orange)); border-radius:50%; box-shadow:0 6px 16px rgba(244,164,96,0.4), inset 0 2px 4px rgba(255,255,255,0.5); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:10000; transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1); animation:float 3s ease-in-out infinite; border:2px solid #FFF; }
             .entry-btn:hover { transform:scale(1.15) rotate(360deg); box-shadow:0 12px 28px rgba(244,164,96,0.6); }
             .entry-btn::after { content:'⚡'; font-size:26px; color:#FFF; text-shadow:0 1px 2px rgba(0,0,0,0.2); }
             @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-            .panel { position:fixed; bottom:150px; right:24px; width:360px; height:560px; background:var(--bg); backdrop-filter:blur(24px) saturate(180%); border-radius:24px; box-shadow:0 16px 48px rgba(0,0,0,0.15); display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:scale(0.8) translateY(40px); transform-origin:bottom right; transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1); overflow:hidden; border:2px solid #FFF; background-image: radial-gradient(#FF669933 2px, transparent 2px); background-size: 20px 20px; }
+            .panel { position:fixed; bottom:150px; right:24px; width:360px; height:560px; background:var(--bg); backdrop-filter:blur(24px) saturate(180%); border-radius:24px; box-shadow:0 16px 48px rgba(0,0,0,0.15); display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:scale(0.8) translateY(40px); transform-origin:bottom right; transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1); overflow:hidden; border:2px solid #FFF; background-image: radial-gradient(var(--orange) 2px, transparent 2px); background-size: 20px 20px; }
             .panel.open { opacity:1; pointer-events:auto; transform:scale(1) translateY(0); }
-            .header { padding:16px 24px; background:linear-gradient(135deg, #FF6699 0%, #FF9BB5 100%); color:white; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 12px rgba(255,102,153,0.3); z-index:10; }
+            .header { padding:16px 24px; background:linear-gradient(135deg, var(--brown) 0%, var(--orange) 100%); color:white; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 12px rgba(139,69,19,0.3); z-index:10; }
             .title { font-weight:900; font-size:18px; letter-spacing:1px; display:flex; align-items:center; gap:6px; text-shadow:0 2px 4px rgba(0,0,0,0.1); }
-            .badge { font-size:10px; background:#FFF; color:#FF6699; padding:2px 6px; border-radius:10px; font-weight:800; box-shadow:0 2px 4px rgba(0,0,0,0.1); transform:translateY(-1px); }
+            .badge { font-size:10px; background:#FFF; color:var(--brown); padding:2px 6px; border-radius:10px; font-weight:800; box-shadow:0 2px 4px rgba(0,0,0,0.1); transform:translateY(-1px); }
             .close-btn { cursor:pointer; width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(255,255,255,0.25); transition:0.3s; }
-            .close-btn:hover { background:white; color:#FF6699; transform:rotate(90deg); }
+            .close-btn:hover { background:white; color:var(--brown); transform:rotate(90deg); }
             .tabs { display:flex; padding:12px 16px 4px; gap:8px; background:rgba(255,255,255,0.8); z-index:5; }
             .tab { flex:1; padding:8px 0; text-align:center; cursor:pointer; color:#888; font-size:13px; font-weight:700; border-radius:12px; transition:0.3s; background:rgba(0,0,0,0.03); position:relative; overflow:hidden; }
-            .tab:hover { background:var(--pink-light); color:var(--pink); }
-            .tab.active { background:var(--pink); color:white; box-shadow:0 4px 12px rgba(255,102,153,0.3); transform:translateY(-1px); }
+            .tab:hover { background:var(--brown-light); color:var(--brown); }
+            .tab.active { background:var(--brown); color:white; box-shadow:0 4px 12px rgba(139,69,19,0.3); transform:translateY(-1px); }
             .content { flex:1; overflow-y:auto; padding:16px; z-index:2; position:relative; }
-            .content::-webkit-scrollbar { width:4px; } .content::-webkit-scrollbar-thumb { background:#FFD1E1; border-radius:10px; }
+            .content::-webkit-scrollbar { width:4px; } .content::-webkit-scrollbar-thumb { background:#F4A460; border-radius:10px; }
             .view { display:none; animation:fadeIn 0.3s ease-out; position:relative; z-index:2; } .view.active { display:block; }
-            .stats-card { background:linear-gradient(135deg,#7FD6F5,#00AEEC); border-radius:16px; padding:20px; color:white; margin-bottom:16px; text-align:center; box-shadow:0 8px 20px rgba(0,174,236,0.3); position:relative; overflow:hidden; transition:transform 0.3s; }
+            .stats-card { background:linear-gradient(135deg, #F4A460, #8B4513); border-radius:16px; padding:20px; color:white; margin-bottom:16px; text-align:center; box-shadow:0 8px 20px rgba(139,69,19,0.3); position:relative; overflow:hidden; transition:transform 0.3s; }
             .stats-card:hover { transform:scale(1.02); }
             .stats-num { font-size:36px; font-weight:900; margin-bottom:4px; text-shadow:0 2px 8px rgba(0,0,0,0.15); letter-spacing:-1px; }
             .stats-label { font-size:13px; font-weight:500; opacity:0.9; background:rgba(0,0,0,0.1); padding:4px 12px; border-radius:20px; display:inline-block; }
             .setting-item { display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.8); padding:14px; margin-bottom:10px; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.03); transition:all 0.3s; border:1px solid #FFF; backdrop-filter:blur(4px); }
-            .setting-item:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,102,153,0.1); border-color:var(--pink-light); background:white; }
+            .setting-item:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(139,69,19,0.1); border-color:var(--brown-light); background:white; }
             .label { font-size:14px; color:#555; font-weight:700; }
             .switch { position:relative; display:inline-block; width:46px; height:26px; }
             .switch input { opacity:0; width:0; height:0; }
@@ -1236,8 +1270,8 @@
             .slider:before { position:absolute; content:""; height:20px; width:20px; left:3px; bottom:3px; background-color:white; transition:.4s cubic-bezier(0.68,-0.55,0.27,1.55); border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
             input:checked + .slider { background-color:var(--orange); }
             input:checked + .slider:before { transform:translateX(20px); }
-            .btn { width:100%; padding:12px; background:var(--blue); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:800; font-size:14px; margin-top:10px; transition:0.3s; box-shadow:0 6px 16px rgba(0,174,236,0.25); }
-            .btn:hover { filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,174,236,0.4); }
+            .btn { width:100%; padding:12px; background:var(--orange); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:800; font-size:14px; margin-top:10px; transition:0.3s; box-shadow:0 6px 16px rgba(244,164,96,0.25); }
+            .btn:hover { filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 10px 24px rgba(244,164,96,0.4); }
             .btn:active { transform:scale(0.96); }
             select { padding:6px 12px; border-radius:10px; border:1px solid #E3E5E7; outline:none; background:#F6F7F8; color:#61666D; font-weight:600; cursor:pointer; }
             .log-box { font-family:"Consolas",monospace; font-size:11px; height:340px; overflow-y:auto; color:#666; padding:10px; line-height:1.6; background:rgba(255,255,255,0.5); border-radius:12px; border:1px solid #EEE; }
@@ -1249,7 +1283,7 @@
             return `
             <div class="entry-btn" id="toggleBtn" title="超电磁炮准备就绪"></div>
             <div class="panel" id="mainPanel">
-                <div class="header"><div class="title">⚡ 全能护盾 <span class="badge">V1.3.1</span></div><div class="close-btn" id="closePanel">✕</div></div>
+                <div class="header"><div class="title">Bilibili全能护盾 <span class="badge">V1.3.2</span></div><div class="close-btn" id="closePanel">✕</div></div>
                 <div class="tabs">
                     <div class="tab active" data-target="home">通用</div><div class="tab" data-target="shield">净化</div>
                     <div class="tab" data-target="unlock">解锁</div><div class="tab" data-target="dev">日志</div>
@@ -1361,7 +1395,7 @@
                 return;
             }
             con.innerHTML = this.logger.logs.slice().reverse().map(l => 
-                `<div style="margin-bottom:6px;border-bottom:1px solid #E3E5E7;padding-bottom:4px"><span style="color:#999;font-size:11px">[${l.time}]</span> <b style="color:${l.type==='BLOCK'||l.type==='RAILGUN'?'#FF6699':'#00AEEC'};margin:0 4px">${l.type}</b> ${l.msg}</div>`
+                `<div style="margin-bottom:6px;border-bottom:1px solid #E3E5E7;padding-bottom:4px"><span style="color:#999;font-size:11px">[${l.time}]</span> <b style="color:${l.type==='BLOCK'||l.type==='RAILGUN'?'#FF6699':'#F4A460'};margin:0 4px">${l.type}</b> ${l.msg}</div>`
             ).join('');
         }
     }

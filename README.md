@@ -1,6 +1,5 @@
 # Bilibili Omnipotent Shield (哔哩哔哩全能护盾)
 
-**Railgun Ultimate Edition | Version 1.3.2-Beta **
 **哔哩哔哩全能护盾** 是一个集成了广告净化、功能解锁、界面美化与安全防护于一体的 Tampermonkey 用户脚本。
 
 本项目基于 **"Railgun" 架构** 重构，旨在提供 Level 5 级别的 B 站浏览体验。它不仅拥有以 **御坂美琴（Misaka Mikoto）** 为灵感的现代化 UI 设计，更在底层逻辑上实现了对页面元素的 DOM 级精准控制。
@@ -125,21 +124,6 @@
 * 番剧页 (`/bangumi/play/...`)
 * 动态页 (`t.bilibili.com/...`)
 * 专栏页 (`/read/cv...`)
-
----
-
-## 更新日志 (Changelog)
-
-### v1.3.1-Release
-
-* [Fix] 修复翻页逻辑缺陷：点击「下一页」后页码错乱的问题
-* [Fix] 修复评论过滤时可能出现的空指针异常
-* [Perf] 优化 Wbi 签名性能：添加 5 分钟缓存机制，减少重复请求
-* [Feature] 完美修复未登录查看评论功能
-* [Feature] 支持评论排序切换（最热/最新）
-* [Feature] 支持评论翻页浏览
-* [Feature] 支持显示粉丝勋章和笔记前缀
-* [Feature] 支持评论图片预览
 
 ---
 
